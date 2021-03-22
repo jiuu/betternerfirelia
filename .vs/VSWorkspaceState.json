@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\backend",
+    "\\backend\\models",
+    "\\backend\\routes",
+    "\\public",
+    "\\src",
+    "\\src\\components"
+  ],
+  "SelectedNode": "\\src\\components\\champion-list.component.js",
+  "PreviewInSolutionExplorer": false
+}
