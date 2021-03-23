@@ -160,7 +160,6 @@ async function getDate(patch) {
 .then((value) => {
 	console.log(value)
 });*/
-let hold = ''
 getChampData('Irelia')
 .then((value)=> {
 	getDate(value)
