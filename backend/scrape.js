@@ -84,10 +84,27 @@ async function getChampData(name) {
 
 				if (!EXCLUDES.map(x => changeNote.includes(x)).includes(true)) {
 					if (changeNote.includes('increased')) {
-						if (EXCEPTIONS.map(x=> changeNote.includes(x)).includes(true) && nerfNote == null){
+						if (EXCEPTIONS.map(x=> changeNote.includes(x)).includes(true)){
+							if (nerfNote == null) {
+								nerfNote = changeNote
+								nerfPatch = patchList[i]
+							}
+
+						} else if (buffNote == null) {
+							buffNote = changeNote
+							buffPatch = patchList[i]
+						}
+					}
+					if (changeNote.includes('reduced')) {
+						if (EXCEPTIONS.map(x=> changeNote.includes(x)).includes(true)){
+							if (buffNote == null) {
+								buffNote = changeNote
+								buffPatch = patchList[i]
+							}
+
+						} else if (nerfNote == null) {
 							nerfNote = changeNote
 							nerfPatch = patchList[i]
-							console.log(i)
 						}
 					}
 			}
@@ -96,24 +113,61 @@ async function getChampData(name) {
 			}
 		}
 	}
+	console.log(buffNote)
 	console.log(nerfNote)
-	console.log(nerfPatch)
 
-	//console.log(patchList)
+	console.log(typeof(buffPatch))
 	await browser.close();	
-    return patchList;
+    return buffPatch;
 
 }
+
+async function getDate(patch) {
+	date = new Date()
+	const browser = await puppeteer.launch();
+
+	const page = await browser.newPage()
+
+	URL = `https://leagueoflegends.fandom.com/wiki/${patch}`
+	console.log(URL);
+
+	await page.goto(URL);
+	await page.waitForSelector('[data-source="Release"]')
+
+	await page.evaluate(() => {
+
+		let table = document.querySelector('td[data-source="Release"]');
+		document.querySelector('sup').remove()
+		return Date.parse(table.innerText);
+
+	}).then(res => {
+		date = res
+	});
+	//console.log(await page.content());
+
+	//const element = await page.$('[class="article-table sticky-header sortable jquery-tablesorter"]');
+	//table_body = await element.$('tbody');
+	//table_rows = await table_body.$('tr');
+	//console.log(await element.text);
+	await browser.close();	
+	//console.log(champList);
+
+	return date;
+}
+
 
 /*getChamps()
 .then((value) => {
 	console.log(value)
 });*/
-
-
+let hold = ''
 getChampData('Irelia')
-.then((value) => {
-	//console.log(value)
-});
+.then((value)=> {
+	getDate(value)
+		.then((value) => {
+			console.log(value)
+	});
+})
+
 
 module.exports.getChamps = getChamps;

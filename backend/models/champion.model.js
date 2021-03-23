@@ -9,6 +9,27 @@ const champSchema = new Schema({
 		trim: true,
 		minlength: 1
 	},
+	buffText: {
+		type: String,
+		required: false,
+		default: "",
+	},
+	buffDate: {
+		type: Date,
+		required: false,
+		default: new Date(),	
+	},
+	nerfText: {
+		type: String,
+		required: false,
+		default: ""
+	},
+	nerfDate: {
+		type: Date,
+		required: false,
+		default: new Date()
+		
+	},
 },	{
 	timestamps: true, 
 });
