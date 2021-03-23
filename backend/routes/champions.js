@@ -10,10 +10,16 @@ router.route('/').get((req,res) => {
 router.route('/add').post((req,res) => {
 	const champname = req.body.name;
 
-	const newChamp = new Champion({name: champname});
+	const newChamp = new Champion({
+	name: req.body.name,
+	buffText: req.body.bufftext,
+	buffDate: new Date(req.body.buffdate),
+	nerfText: req.body.nerftext,
+	nerfDate: new Date(req.body.nerfdate)
+	});
 
 	newChamp.save()
-		.then(() => res.json('User added!'))
+		.then(() => res.json('Champion added!'))
 		.catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -25,7 +31,7 @@ router.route('/:id').get((req,res) => {
 
 router.route('/:id').delete((req,res) => {
 	Champion.findByIdAndDelete(req.params.id)
-	.then(() => res.json('Exercise deleted.'))
+	.then(() => res.json('Champion deleted.'))
 	.catch(err => res.status(400).json('Error: ' + err));
 });
 
