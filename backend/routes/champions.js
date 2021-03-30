@@ -13,9 +13,9 @@ router.route('/add').post((req,res) => {
 	const newChamp = new Champion({
 	name: req.body.name,
 	buffText: req.body.bufftext,
-	buffDate: new Date(req.body.buffdate),
+	buffDate: req.body.buffdate,
 	nerfText: req.body.nerftext,
-	nerfDate: new Date(req.body.nerfdate)
+	nerfDate: req.body.nerfdate
 	});
 
 	newChamp.save()
