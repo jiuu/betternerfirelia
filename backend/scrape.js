@@ -16,7 +16,7 @@ async function getChamps() {
 		let table = document.querySelector('[class="article-table sticky-header sortable jquery-tablesorter"]');
 		let tablerows = Array.from(table.querySelectorAll('[data-champion]'));
 		let rows = tablerows.map(x=> x.querySelector('a'));
-		let names = rows.map(x=> (x.innerHTML).split('<br>')[0]);
+		let names = rows.map(x=> (x.innerText).split('\n')[0]);
 
     return names;
 
@@ -35,7 +35,7 @@ async function getChamps() {
 	return champList;
 }
 async function getChampData(name) {
-	const EXCLUDES = ['BUG FIX', 'NEW EFFECT']
+	const EXCLUDES = ['BUG FIX', 'NEW EFFECT', 'REMOVED', 'UNDOCUMENTED', ]
 	const EXCEPTIONS = ['Cooldown', 'Mana cost']
 	buffNote = null
 	nerfNote = null
@@ -44,7 +44,7 @@ async function getChampData(name) {
 	patchList = [];
 	changeList = [];
 	
-	console.log(buffNote)
+	//console.log(buffNote)
 	const browser = await puppeteer.launch();
 	const page = await browser.newPage()
 
@@ -76,35 +76,40 @@ async function getChampData(name) {
 	});
 
 	for (i = 0; i < changeList.length; i++) {
+
 		if (buffNote != null && nerfNote != null) {
 			break;
 		}
+		if (patchList[i].includes('Added')) {
+			break;
+		}
 		for(change of changeList[i]) {
+			
 			for (changeNote of change) {
-
+				//console.log(changeNote)
 				if (!EXCLUDES.map(x => changeNote.includes(x)).includes(true)) {
 					if (changeNote.includes('increased')) {
 						if (EXCEPTIONS.map(x=> changeNote.includes(x)).includes(true)){
 							if (nerfNote == null) {
 								nerfNote = changeNote
-								nerfPatch = patchList[i]
+								nerfPatch = patchList[i].split(' ')[0]
 							}
 
 						} else if (buffNote == null) {
 							buffNote = changeNote
-							buffPatch = patchList[i]
+							buffPatch = patchList[i].split(' ')[0]
 						}
 					}
 					if (changeNote.includes('reduced')) {
 						if (EXCEPTIONS.map(x=> changeNote.includes(x)).includes(true)){
 							if (buffNote == null) {
 								buffNote = changeNote
-								buffPatch = patchList[i]
+								buffPatch = patchList[i].split(' ')[0]
 							}
 
 						} else if (nerfNote == null) {
 							nerfNote = changeNote
-							nerfPatch = patchList[i]
+							nerfPatch = patchList[i].split(' ')[0]
 						}
 					}
 			}
@@ -113,23 +118,35 @@ async function getChampData(name) {
 			}
 		}
 	}
-	console.log(buffNote)
-	console.log(nerfNote)
+	if (buffNote == null) {
+		buffNote = `${name} has not been buffed yet`
+	}
+	
+	if (nerfNote == null) {
+		nerfNote = `${name} has not been nerfed yet`
+	}
+	console.log(buffPatch)
+	
+	console.log(nerfPatch)
 
-	console.log(typeof(buffPatch))
+
+	//console.log(typeof(buffPatch))
 	await browser.close();	
-    return buffPatch;
+    return [buffNote, buffPatch, nerfNote, nerfPatch];
 
 }
 
 async function getDate(patch) {
+	if (patch == null) {
+		return ''
+	}
 	date = new Date()
 	const browser = await puppeteer.launch();
 
 	const page = await browser.newPage()
 
 	URL = `https://leagueoflegends.fandom.com/wiki/${patch}`
-	console.log(URL);
+	//console.log(URL);
 
 	await page.goto(URL);
 	await page.waitForSelector('[data-source="Release"]')
@@ -137,8 +154,10 @@ async function getDate(patch) {
 	await page.evaluate(() => {
 
 		let table = document.querySelector('td[data-source="Release"]');
-		document.querySelector('sup').remove()
-		return Date.parse(table.innerText);
+		let child = table.querySelector('sup');
+		//document.querySelector('sup').remove()
+		table.removeChild(child)
+		return Date.parse(table.innerHTML);
 
 	}).then(res => {
 		date = res
@@ -160,13 +179,16 @@ async function getDate(patch) {
 .then((value) => {
 	console.log(value)
 });*/
-getChampData('Irelia')
+getChampData('lillia')
 .then((value)=> {
-	getDate(value)
+	getDate(value[1])
 		.then((value) => {
 			console.log(value)
 	});
+
 })
 
 
 module.exports.getChamps = getChamps;
+module.exports.getChampData = getChampData;
+module.exports.getDate = getDate;
