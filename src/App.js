@@ -12,6 +12,7 @@ function App() {
             <Navbar />
             <br/>
             <Route path="/" exact component={ChampionList} />
+            <Route path="/champions/:id" component={ChampionList} />
         </div>
     </Router>
   );

@@ -3,7 +3,11 @@ import {Link} from 'react-router-dom';
 import axios from 'axios';
 
 const Champion = props => (
-	<p>{props.champion.name}</p>
+	
+		<a href={"http://localhost:3000/champions/" + props.champion.name}>
+			<img src={"http://localhost:3000/icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
+		</a>
+	
 )
 
 export default class ChampionList extends Component {
@@ -25,7 +29,9 @@ export default class ChampionList extends Component {
 
 	}
 	championList() {
+
 		return this.state.champions.map(currentchampion => {
+			
 			return <Champion champion = {currentchampion}/>;
 		})
 	}
