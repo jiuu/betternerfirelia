@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/testRoute', (req,res) => {
+router.get('/searchForSummoner', (req,res) => {
     res.send('testinsdg');
 })
 

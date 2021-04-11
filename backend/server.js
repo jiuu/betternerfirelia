@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const testRouter = require('./routes/testroute');
+const testRouter = require('./routes/summonerSearching');
 require('dotenv').config();
 
 const app = express();
@@ -11,7 +11,7 @@ const riot_api_key = process.env.RIOT_API_KEY;
 
 app.use(cors());
 app.use(express.json());
-app.use('/testRoute', require('./routes/testroute'));
+app.use('/searchForSummoner', require('./routes/summonerSearching'));
 
 mongoose.connect(uri, {useNewUrlParser:true, useCreateIndex:true});
 const connection = mongoose.connection;
@@ -26,7 +26,7 @@ app.get('/', (req,res) => {
 	res.json({api_key: riot_api_key})
 })
 
-app.get('/testRoute', testRouter);
+app.get('/searchForSummoner', testRouter);
 app.use('/champions', championsRouter);
 
 
