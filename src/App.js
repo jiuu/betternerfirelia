@@ -9,14 +9,21 @@ import "../src/styles/App.css";
 function App() {
   return (
     <div>
-    <Router>
-      <Navbar />
-        <div className="testContainer">
-        </div>
-        <div className="summonerNameContainer">
+      <Router>
+/*
+        <div className="container">
+            <Navbar />
+            <br/>
+            <Route path="/" exact component={ChampionList} />
+            <Route path="/champions/:id" component={ChampionList} />
+*/
+        <Navbar />
+          <div className="testContainer">
+          </div>
+          <div className="summonerNameContainer">
             <SearchSummoner />
-        </div>
-    </Router>
+          </div>
+      </Router>
     </div>
   );
 }
