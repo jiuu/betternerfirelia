@@ -57,9 +57,10 @@ export default class ChampionList extends Component {
 					<IndividualChampion championName="Bard" />
 				</Route>
 				<Route path="/">
-				<div className="championList">
-					{this.championList()}
-				</div>
+					<p> Testing Stuff</p>
+					<div className="championList">
+						{this.championList()}
+					</div>
 				</Route>
 			</Switch>
 			</Router>

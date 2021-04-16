@@ -11,8 +11,6 @@ function App() {
   return (
     <div className = "poop">
         <Navbar />
-          <div className="testContainer">
-          </div>
     </div>
   );
 }
