@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import styles from '../styles/championliststyles.css';
+
 
 const Champion = props => (
 	
@@ -38,7 +40,7 @@ export default class ChampionList extends Component {
 
 	render() {
 		return(
-			<div>
+			<div className="championList">
 				<p>{this.championList()}</p>
 			</div>
 		)
