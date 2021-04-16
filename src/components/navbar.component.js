@@ -7,6 +7,9 @@ import {
   } from "react-router-dom";
   import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 
+import About from './about.component';
+import Home from './home.component';
+import Contact from './contact.component';
 class BootstrapNavbar extends React.Component{
 
     render(){
@@ -21,8 +24,8 @@ class BootstrapNavbar extends React.Component{
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
                                     <Nav.Link href="/">Home</Nav.Link>
-                                    <Nav.Link href="/about-us">Contact Us</Nav.Link>
-                                    <Nav.Link href="/contact-us">About Us</Nav.Link>
+                                    <Nav.Link href="/contact">Contact Us</Nav.Link>
+                                    <Nav.Link href="/about">About Us</Nav.Link>
                                     <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -36,6 +39,18 @@ class BootstrapNavbar extends React.Component{
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
+                            <Switch>
+
+                                <Route path="/about">
+                                    <About />
+                                </Route>
+                                <Route path="/contact">
+                                    <Contact />
+                                </Route>
+                                <Route path="/">
+                                    <Home />
+                                </Route>
+                                </Switch>
                         </Router>
                     </div>
                 </div>
