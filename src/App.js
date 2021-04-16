@@ -8,11 +8,9 @@ import "../src/styles/App.css";
 function App() {
   return (
     <div>
-
         <Navbar />
           <div className="testContainer">
           </div>
-
     </div>
   );
 }
