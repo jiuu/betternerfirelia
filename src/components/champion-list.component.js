@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import styles from '../styles/championliststyles.css';
+import IndividualChampion from './individualchampion.component';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -47,12 +49,17 @@ export default class ChampionList extends Component {
 	render() {
 		return(
 			<Router>
+				
+			<Switch>
+			
+				<Route path="/Bard">
+					<p>Tessdasdasdsdsdt</p>
+					<IndividualChampion championName="Bard" />
+				</Route>
+				<Route path="/">
 				<div className="championList">
 					{this.championList()}
 				</div>
-			<Switch>
-				<Route path="/champions/Bard">
-					<p>Tessdasdasdsdsdt</p>
 				</Route>
 			</Switch>
 			</Router>
