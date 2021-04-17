@@ -2,10 +2,11 @@ import React from 'react'
 import axios from 'axios';
 
 
-class IndividualChampion extends React.Component {
+class ChampionPage extends React.Component {
     super(props) {
         constructor(props);
         this.state = {name: this.props.championName, championInfo: {}}
+        
     }
 
     fetchChampionData = function() {
@@ -24,4 +25,4 @@ class IndividualChampion extends React.Component {
     }
 }
 
-export default IndividualChampion;
+export default ChampionPage;

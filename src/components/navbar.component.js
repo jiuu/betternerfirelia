@@ -10,6 +10,7 @@ import {
 import About from './about.component';
 import Home from './home.component';
 import Contact from './contact.component';
+
 class BootstrapNavbar extends React.Component{
 
     render(){
