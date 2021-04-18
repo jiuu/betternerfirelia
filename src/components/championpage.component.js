@@ -18,7 +18,8 @@ class ChampionPage extends React.Component {
     render() {
         return (
             <div>
-                <p>{this.state}</p>
+                <p>{this.state.name}</p>
+                <p>{this.state.championInfo}</p>
                 <div>{this.props.championName}</div>
             </div>,
             
