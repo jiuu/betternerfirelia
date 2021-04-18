@@ -19,8 +19,9 @@ class ChampionPage extends React.Component {
         return (
             <div>
                 <p>{this.state}</p>
+                <div>{this.props.championName}</div>
             </div>,
-            <div>{this.props.championName}</div>
+            
         )
     }
 }
