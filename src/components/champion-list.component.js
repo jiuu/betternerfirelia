@@ -32,6 +32,7 @@ export default class ChampionList extends Component {
 	}
 	
 	componentDidMount() {
+		
 		axios.get('http://localhost:5000/champions/')
 		.then(response => {
 			this.setState({champions: response.data})
@@ -55,15 +56,12 @@ export default class ChampionList extends Component {
 				
 			<Switch>
 				
-
-
-				<Route path="/">
-					<div className="championList">
-					<p id="mytitle">Find a champion</p>
-					
-						{this.championList()}
-					</div>
+				<Route path="/champions/:id">
+					<ChampionPage championInfo="testChampInfo" championName="testChampName"></ChampionPage>
 				</Route>
+				<div className="championList">
+						{this.championList()}
+				</div>
 			</Switch>
 			</Router>
 		)
