@@ -1,28 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import axios from 'axios';
+ 
 
 
-class ChampionPage extends React.Component {
-    super(props) {
-        constructor(props);
-        this.state = {name: this.props.championName, championInfo: {}}
-        
-    }
+function ChampionPage(props) {
 
-    fetchChampionData = function() {
-        axios.get('http://localhost:5000/champions/' + this.state)
-        .then(response => {
-            this.setState({championInfo: response.json()})
-        })
-    }
-    render() {
-        return (
-            <div>
-                <p>{this.props.championInfo}</p>
-                <p>{this.props.championName}</p>
-            </div>
-        )
-    }
+    const [name, setName] = useState(props.championName);
+    
+
+    return (
+        <div>
+            <p>{name}</p>
+        </div>
+      );
+ 
 }
 
 export default ChampionPage;
