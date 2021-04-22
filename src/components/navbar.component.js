@@ -10,7 +10,8 @@ import {
 import About from './about.component';
 import Home from './home.component';
 import Contact from './contact.component';
-class BootstrapNavbar extends React.Component{
+
+class MyNav extends React.Component{
 
     render(){
         return(
@@ -19,7 +20,7 @@ class BootstrapNavbar extends React.Component{
                     <div className="col-md-12">
                         <Router>
                             <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-                                <Navbar.Brand href="#home">BNI</Navbar.Brand>
+                                <Navbar.Brand href="/">BNI</Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
@@ -40,9 +41,8 @@ class BootstrapNavbar extends React.Component{
                             </Navbar>
                             <br />
                             <Switch>
-
                                 <Route path="/about">
-                                    <About />
+                                <About />
                                 </Route>
                                 <Route path="/contact">
                                     <Contact />
@@ -50,7 +50,7 @@ class BootstrapNavbar extends React.Component{
                                 <Route path="/">
                                     <Home />
                                 </Route>
-                                </Switch>
+                            </Switch>
                         </Router>
                     </div>
                 </div>
@@ -59,4 +59,4 @@ class BootstrapNavbar extends React.Component{
     }
 }
 
-export default BootstrapNavbar;
+export default MyNav;

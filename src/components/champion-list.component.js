@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import styles from '../styles/championliststyles.css';
-import IndividualChampion from './individualchampion.component';
+import ChampionPage from './championpage.component';
 
 import {
     BrowserRouter as Router,
@@ -10,6 +10,7 @@ import {
     Route,
     useParams,
   } from "react-router-dom";
+  
 
 
 const Champion = props => (
@@ -27,8 +28,11 @@ export default class ChampionList extends Component {
 		this.state = {
 			champions: []
 		};
+		
 	}
+	
 	componentDidMount() {
+		
 		axios.get('http://localhost:5000/champions/')
 		.then(response => {
 			this.setState({champions: response.data})
@@ -51,17 +55,13 @@ export default class ChampionList extends Component {
 			<Router>
 				
 			<Switch>
-			
-				<Route path="/Bard">
-					<p>Tessdasdasdsdsdt</p>
-					<IndividualChampion championName="Bard" />
+				
+				<Route path="/champions/:id">
+					<ChampionPage championInfo="testChampInfo" championName="testChampName"></ChampionPage>
 				</Route>
-				<Route path="/">
-					<p> Testing Stuff</p>
-					<div className="championList">
+				<div className="championList">
 						{this.championList()}
-					</div>
-				</Route>
+				</div>
 			</Switch>
 			</Router>
 		)
