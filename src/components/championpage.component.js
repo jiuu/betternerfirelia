@@ -34,10 +34,41 @@ function championIcon(props) {
 
 
 class ChampionPage extends Component {
+
+    constructor(props) {
+		super(props);
+
+		this.state = {
+			champion: []
+		};
+		
+	}
+    componentDidMount() {
+		
+		axios.get('http://localhost:5000/champions/' + this.props.match.params.id)
+		.then(response => {
+			this.setState({champion: response.data[0]})
+            console.log(response.data[0])
+
+		})
+		.catch((error) => {
+		console.log(error);
+		})
+
+
+	}
+
+
     render() {
+        console.log('hey')
+        
       return (
         <div>
-          Info for {this.props.match.params.id}
+          Info for {this.state.champion.name}
+          
+        <p>{this.state.champion.buffText}</p>
+
+
           <a href="/"><p>Back to home page!</p></a>
         </div>
         

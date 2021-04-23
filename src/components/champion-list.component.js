@@ -46,7 +46,7 @@ export default class ChampionList extends Component {
 
 		return this.state.champions.map(currentchampion => {
 			
-			return <Champion id="myChampion" champion = {currentchampion}/>;
+			return <Champion champion = {currentchampion}/>;
 		})
 	}
 

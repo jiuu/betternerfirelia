@@ -24,7 +24,7 @@ router.route('/add').post((req,res) => {
 });
 
 router.route('/:id').get((req,res) => {
-	Champion.findById(req.params.id)
+	Champion.find({name: req.params.id})  //change to not care about upperlowercase later
 	.then(champion => res.json(champion))
 	.catch(err => res.status(400).json('Error: ' + err));
 });
