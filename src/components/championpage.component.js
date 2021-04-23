@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {Component} from 'react'
 import axios from 'axios';
 import Home from './home.component';
 import styles from '../styles/championpagestyles.css';
@@ -32,20 +33,18 @@ function championIcon(props) {
 }
 
 
-
-function ChampionPage(props) {
-
-    const [name, setName] = useState(props.championName);
-    
-
-    return (
-        <div className="myChampionPage">
-            <a href="/"><p>Back to home page!</p></a>
-            
-            <p>{name}</p>
+class ChampionPage extends Component {
+    render() {
+      return (
+        <div>
+          Info for {this.props.match.params.id}
+          <a href="/"><p>Back to home page!</p></a>
         </div>
+        
+
+        
       );
- 
-}
+    }
+  }
 
 export default ChampionPage;
