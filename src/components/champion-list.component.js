@@ -46,7 +46,7 @@ export default class ChampionList extends Component {
 
 		return this.state.champions.map(currentchampion => {
 			
-			return <Champion id="myChampion" champion = {currentchampion}/>;
+			return <Champion champion = {currentchampion}/>;
 		})
 	}
 
@@ -56,9 +56,7 @@ export default class ChampionList extends Component {
 				
 			<Switch>
 				
-				<Route path="/champions/:id">
-					<ChampionPage championInfo="testChampInfo" championName="testChampName"></ChampionPage>
-				</Route>
+			<Route path="/champions/:id" component={ChampionPage} />
 				<div className="championList">
 						{this.championList()}
 				</div>
