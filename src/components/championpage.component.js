@@ -12,7 +12,7 @@ import {
 } from "react-router-dom";
 
 
-function basicChampionInfo(props) {
+function BasicChampionInfo(props) {
 
 
     return (
@@ -22,13 +22,15 @@ function basicChampionInfo(props) {
     )
 }
 
-function championIcon(props) {
-    
-
+function ChampionIcon(props) {
+    console.log(props)
+    let imageSource = "../icons/" + props + ".png"
+    console.log(imageSource)
     return (
-        <div>
-
+        <div className="imageSourceClass">
+            <img src={imageSource}></img>
         </div>
+        
     )
 }
 
@@ -49,6 +51,7 @@ class ChampionPage extends Component {
 		.then(response => {
 			this.setState({champion: response.data[0]})
             console.log(response.data[0])
+
 
 		})
 		.catch((error) => {
