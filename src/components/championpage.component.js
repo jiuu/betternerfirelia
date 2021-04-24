@@ -11,7 +11,7 @@ import {
 } from "react-router-dom";
 
 
-function basicChampionInfo(props) {
+function BasicChampionInfo(props) {
 
 
     return (
@@ -21,13 +21,15 @@ function basicChampionInfo(props) {
     )
 }
 
-function championIcon(props) {
-    
-
+function ChampionIcon(props) {
+    console.log(props)
+    let imageSource = "../icons/" + props + ".png"
+    console.log(imageSource)
     return (
-        <div>
-
+        <div className="imageSourceClass">
+            <img src={imageSource}></img>
         </div>
+        
     )
 }
 
@@ -41,8 +43,10 @@ function ChampionPage(props) {
     return (
         <div className="myChampionPage">
             <a href="/"><p>Back to home page!</p></a>
-            
+
             <p>{name}</p>
+            <div></div>
+            {ChampionIcon(name)}
         </div>
       );
  
