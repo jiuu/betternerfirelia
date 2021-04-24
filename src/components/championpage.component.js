@@ -45,7 +45,6 @@ function ChampionPage(props) {
             <a href="/"><p>Back to home page!</p></a>
 
             <p>{name}</p>
-            <div></div>
             {ChampionIcon(name)}
         </div>
       );
