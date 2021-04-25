@@ -1,6 +1,7 @@
 
 /*
 import React, {useState} from 'react'
+import {Component} from 'react'
 import axios from 'axios';
 import Home from './home.component';
 import styles from '../styles/championpagestyles.css';
@@ -36,22 +37,51 @@ function ChampionIcon(props) {
 }
 
 
+class ChampionPage extends Component {
 
-function ChampionPage(props) {
+    constructor(props) {
+		super(props);
 
-    const [name, setName] = useState(props.championName);
-    
+		this.state = {
+			champion: []
+		};
+		
+	}
+    componentDidMount() {
+		
+		axios.get('http://localhost:5000/champions/' + this.props.match.params.id)
+		.then(response => {
+			this.setState({champion: response.data[0]})
+            console.log(response.data[0])
 
-    return (
-        <div className="myChampionPage">
-            <a href="/"><p>Back to home page!</p></a>
 
-            <p>{name}</p>
-            {ChampionIcon(name)}
+		})
+		.catch((error) => {
+		console.log(error);
+		})
+
+
+	}
+
+
+    render() {
+        console.log('hey')
+        
+      return (
+        <div>
+          Info for {this.state.champion.name}
+          
+        <p>{this.state.champion.buffText}</p>
+
+
+          <a href="/"><p>Back to home page!</p></a>
         </div>
+        
+
+        
       );
- 
-}
+    }
+  }
 
 export default ChampionPage;
 
