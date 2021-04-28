@@ -7,7 +7,12 @@ import {
   } from "react-router-dom";
   import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 
-class BootstrapNavbar extends React.Component{
+import About from './about.component';
+import Home from './home.component';
+import Contact from './contact.component';
+import SearchSummoner from './searchsummoner.component';
+
+class MyNav extends React.Component{
 
     render(){
         return(
@@ -16,7 +21,7 @@ class BootstrapNavbar extends React.Component{
                     <div className="col-md-12">
                         <Router>
                             <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
-                                <Navbar.Brand href="#home">BNI</Navbar.Brand>
+                                <Navbar.Brand href="/">BNI</Navbar.Brand>
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
@@ -36,6 +41,20 @@ class BootstrapNavbar extends React.Component{
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
+                            <Switch>
+                                <Route path="/about">
+                                <About />
+                                </Route>
+                                <Route path="/contact">
+                                    <Contact />
+                                </Route>
+                                <Route path="/search">
+                                    <SearchSummoner />
+                                </Route>
+                                <Route path="/">
+                                    <Home />
+                                </Route>
+                            </Switch>
                         </Router>
                     </div>
                 </div>
@@ -44,4 +63,4 @@ class BootstrapNavbar extends React.Component{
     }
 }
 
-export default BootstrapNavbar;
+export default MyNav;

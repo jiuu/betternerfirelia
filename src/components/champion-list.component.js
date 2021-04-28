@@ -1,10 +1,21 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import styles from '../styles/championliststyles.css';
+import ChampionPage from './championpage.component';
+
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    useParams,
+  } from "react-router-dom";
+  
+
 
 const Champion = props => (
 	
-		<a href={"http://localhost:3000/champions/" + props.champion.name}>
+		<a id={props.key} href={"/champions/" + props.champion.name}>
 			<img src={"http://localhost:3000/icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
 		</a>
 	
@@ -17,8 +28,11 @@ export default class ChampionList extends Component {
 		this.state = {
 			champions: []
 		};
+		
 	}
+	
 	componentDidMount() {
+		
 		axios.get('http://localhost:5000/champions/')
 		.then(response => {
 			this.setState({champions: response.data})
@@ -29,18 +43,25 @@ export default class ChampionList extends Component {
 
 	}
 	championList() {
-
+		let myKeyCounter = 0;
 		return this.state.champions.map(currentchampion => {
 			
-			return <Champion champion = {currentchampion}/>;
+			return <Champion key={myKeyCounter++} champion = {currentchampion}/>;
 		})
 	}
 
 	render() {
 		return(
-			<div>
-				<p>{this.championList()}</p>
-			</div>
+			<Router>
+				
+			<Switch>
+			
+			<Route path="/champions/:id" component={ChampionPage} />
+				<div className="championList">
+						{this.championList()}
+				</div>
+			</Switch>
+			</Router>
 		)
 	}
 }
