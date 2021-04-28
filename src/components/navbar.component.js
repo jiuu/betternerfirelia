@@ -41,20 +41,6 @@ class MyNav extends React.Component{
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
-                            <Switch>
-                                <Route path="/about">
-                                <About />
-                                </Route>
-                                <Route path="/contact">
-                                    <Contact />
-                                </Route>
-                                <Route path="/search">
-                                    <SearchSummoner />
-                                </Route>
-                                <Route path="/">
-                                    <Home />
-                                </Route>
-                            </Switch>
                         </Router>
                     </div>
                 </div>
