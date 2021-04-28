@@ -1,7 +1,6 @@
-.Search {
-
-
+.searchClass {
+    width: 50%;
 }
-.summonerNameContainer {
-    padding: 100px;
+.dropDownServerSelect {
+    display: flex;
 }
