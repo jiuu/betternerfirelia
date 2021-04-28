@@ -1,6 +1,12 @@
 
+<<<<<<< Updated upstream:src/styles/App.css
 .mainBody {
   background-color: black;
   width: 100%;
   height: 1000px;
+=======
+body {
+  background-color: rgb(38, 40, 43);
+  color: gray
+>>>>>>> Stashed changes:src/styles/appstyles.css
 }
