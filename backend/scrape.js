@@ -41,8 +41,11 @@ async function getChampData(name) {
 	nerfNote = null
 	buffPatch = null
 	nerfPatch = null
+	buffAbility = null
+	nerfAbility = null
 	patchList = [];
 	changeList = [];
+	abilityList = [];
 	
 	//console.log(buffNote)
 	const browser = await puppeteer.launch();
@@ -57,22 +60,35 @@ async function getChampData(name) {
 		let patches = Array.from(div.querySelectorAll('dl'));
 		patches = patches.map(x=> x.innerText)
 		let changes = Array.from(div.querySelectorAll(':scope > ul'));
+		let abilities = [...changes];
+		abilities = abilities
+			.map(x=> Array.from(x.querySelectorAll(':scope > li'))
+				.map(x=>
+					x.innerText.split('\n')[0]
+				)
+			)
 		changes = changes
 			.map(x=> Array.from(x.querySelectorAll(':scope > li'))
 				.map(x=>
 					Array.from(x.querySelectorAll('li'))
-					.map(x=>
-						x.innerText
+						.map(x=>
+							x.innerText
+						)
 					)
 				)
-			)
+		
+			
+
 		//changes = changes.map(y=> Array.from(y.querySelectorAll('li')))
 
-    return [patches,changes];
+    return [patches,changes,abilities];
 
 	}).then(res => {
 		patchList = res[0]
 		changeList = res[1]
+		abilityList = res[2]
+		console.log(res[1])
+		console.log(res[2])
 	});
 
 	for (i = 0; i < changeList.length; i++) {
@@ -83,7 +99,8 @@ async function getChampData(name) {
 		if (patchList[i].includes('Added')) {
 			break;
 		}
-		for(change of changeList[i]) {
+		for (j = 0; j < changeList[i].length; j++) {
+			let change = changeList[i][j]
 			
 			for (changeNote of change) {
 				//console.log(changeNote)
@@ -93,11 +110,13 @@ async function getChampData(name) {
 							if (nerfNote == null) {
 								nerfNote = changeNote
 								nerfPatch = patchList[i].split(' ')[0]
+								nerfAbility = abilityList[i][j]
 							}
 
 						} else if (buffNote == null) {
 							buffNote = changeNote
 							buffPatch = patchList[i].split(' ')[0]
+							buffAbility = abilityList[i][j]
 						}
 					}
 					if (changeNote.includes('reduced')) {
@@ -105,11 +124,16 @@ async function getChampData(name) {
 							if (buffNote == null) {
 								buffNote = changeNote
 								buffPatch = patchList[i].split(' ')[0]
+								buffAbility = abilityList[i][j]
+
+
 							}
 
 						} else if (nerfNote == null) {
 							nerfNote = changeNote
 							nerfPatch = patchList[i].split(' ')[0]
+							nerfAbility = abilityList[i][j]
+
 						}
 					}
 			}
@@ -132,7 +156,7 @@ async function getChampData(name) {
 
 	//console.log(typeof(buffPatch))
 	await browser.close();	
-    return [buffNote, buffPatch, nerfNote, nerfPatch];
+    return [buffNote, buffPatch, nerfNote, nerfPatch, buffAbility, nerfAbility];
 
 }
 
@@ -179,14 +203,19 @@ async function getDate(patch) {
 .then((value) => {
 	console.log(value)
 });*/
-getChampData('lillia')
+/*getChampData('lillia')
 .then((value)=> {
 	getDate(value[1])
 		.then((value) => {
 			console.log(value)
 	});
+}) */
+getChampData('irelia')
+.then((value)=> {
+	console.log(value)
+});
 
-})
+
 
 
 module.exports.getChamps = getChamps;

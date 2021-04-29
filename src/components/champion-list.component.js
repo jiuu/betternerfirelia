@@ -15,7 +15,7 @@ import {
 
 const Champion = props => (
 	
-		<a href={"/champions/" + props.champion.name}>
+		<a id={props.key} href={"/champions/" + props.champion.name}>
 			<img src={"http://localhost:3000/icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
 		</a>
 	
@@ -43,10 +43,10 @@ export default class ChampionList extends Component {
 
 	}
 	championList() {
-
+		let myKeyCounter = 0;
 		return this.state.champions.map(currentchampion => {
 			
-			return <Champion id="myChampion" champion = {currentchampion}/>;
+			return <Champion key={myKeyCounter++} champion = {currentchampion}/>;
 		})
 	}
 
@@ -55,10 +55,8 @@ export default class ChampionList extends Component {
 			<Router>
 				
 			<Switch>
-				
-				<Route path="/champions/:id">
-					<ChampionPage championInfo="testChampInfo" championName="testChampName"></ChampionPage>
-				</Route>
+			
+			<Route path="/champions/:id" component={ChampionPage} />
 				<div className="championList">
 						{this.championList()}
 				</div>

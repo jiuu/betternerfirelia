@@ -10,6 +10,7 @@ import {
 import About from './about.component';
 import Home from './home.component';
 import Contact from './contact.component';
+import SearchSummoner from './searchsummoner.component';
 
 class MyNav extends React.Component{
 
@@ -24,10 +25,10 @@ class MyNav extends React.Component{
                                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                                 <Navbar.Collapse id="basic-navbar-nav">
                                     <Nav className="mr-auto">
-                                    <Nav.Link href="/">Home</Nav.Link>
-                                    <Nav.Link href="/contact">Contact Us</Nav.Link>
-                                    <Nav.Link href="/about">About Us</Nav.Link>
-                                    <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+                                    <Nav.Link href="/contact">Contact</Nav.Link>
+                                    <Nav.Link href="/about">About</Nav.Link>
+                                    <Nav.Link href="/search">Search Summoner</Nav.Link>
+                                    <NavDropdown title="Login" >
                                         <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                                         <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -40,17 +41,6 @@ class MyNav extends React.Component{
                                 </Navbar.Collapse>
                             </Navbar>
                             <br />
-                            <Switch>
-                                <Route path="/about">
-                                <About />
-                                </Route>
-                                <Route path="/contact">
-                                    <Contact />
-                                </Route>
-                                <Route path="/">
-                                    <Home />
-                                </Route>
-                            </Switch>
                         </Router>
                     </div>
                 </div>
