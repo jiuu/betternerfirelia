@@ -5,11 +5,12 @@ import '../styles/searchsummonerstyles.css';
 
 const SearchSummoner = () => {
     return (
-        <div className = "searchClass">
-            <Form>
+        <div className = "searchClassContainer">
+
+            <Form className="searchForm">
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Summoner name</Form.Label>
-                    <Form.Control type="email" placeholder="Enter a summoner name" />
+                    <Form.Control type="text" placeholder="Enter a summoner name" />
                     <Form.Text className="text-muted">
                     </Form.Text>
                 </Form.Group>
@@ -19,16 +20,18 @@ const SearchSummoner = () => {
                         Select a region
                     </Dropdown.Toggle>
 
-                    <Dropdown.Menu>
-                        <Dropdown.Item >NA</Dropdown.Item>
+                    <Dropdown.Menu id="sdsd">
+                        <Dropdown.Item>NA</Dropdown.Item>
                         <Dropdown.Item>EUW</Dropdown.Item>
-                        <Dropdown.Item >EUNE</Dropdown.Item>
+                        <Dropdown.Item>EUNE</Dropdown.Item>
                     </Dropdown.Menu>
                     </Dropdown>
                 </div>
-                <Button variant="primary" type="submit">
+                <div className = "buttonContainer">
+                <Button className = "submitbutton" variant="primary" type="submit">
                     Submit
                 </Button>
+                </div>
             </Form>
         </div>
     )
