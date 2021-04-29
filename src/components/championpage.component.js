@@ -123,24 +123,16 @@ function ChampionIcon(props) {
 }
 
 
-class ChampionPage extends Component {
+function ChampionPage(props) {
 
-    constructor(props) {
-		super(props);
 
-		this.state = {
-			champion: []
-		};
+  const [champions, setChampions] = useState(componentDidMount())
+    
+  function componentDidMount() {
 		
-	}
-    componentDidMount() {
-		
-		axios.get('http://localhost:5000/champions/' + this.props.match.params.id)
+		axios.get('http://localhost:5000/champions/' + props.match.params.id)
 		.then(response => {
-			this.setState({champion: response.data[0]})
-            console.log(response.data[0])
-
-
+			return {champion: response.data[0]}
 		})
 		.catch((error) => {
 		    console.log(error);
@@ -150,23 +142,18 @@ class ChampionPage extends Component {
 	}
 
 
-    render() {
-        console.log('hey')
-        
-      return (
-        <div>
-          Info for {this.state.champion.name}
-          
-        <p>{this.state.champion.buffText}</p>
-
-
-          <a href="/"><p>Back to home page!</p></a>
-        </div>
+  console.log("DASDFASUIOFHSDILOUGFHSDGFYUILOHSDGILOUSDHGL:")
+  console.log(props)
+    return (
+      <div>
+        Info for {props.match.params.id}
         
 
-        
-      );
-    }
+
+        <a href="/"><p>Back to home page!</p></a>
+      </div>
+    );
+  
   }
 
 export default ChampionPage;
