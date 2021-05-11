@@ -86,7 +86,7 @@ class ChampionPage extends Component {
 export default ChampionPage;
 
 */
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {Component} from 'react'
 import axios from 'axios';
 import Home from './home.component';
@@ -126,26 +126,23 @@ function ChampionIcon(props) {
 function ChampionPage(props) {
 
 
-  const [champions, setChampions] = useState(componentDidMount())
-    
-  function componentDidMount() {
-		
-		axios.get('http://localhost:5000/champions/' + props.match.params.id)
+  const [champion, setChampion] = useState(0)
+  useEffect(() => {
+    axios.get('http://localhost:5000/champions/' + props.match.params.id)
 		.then(response => {
-			return {champion: response.data[0]}
+			setChampion(response.data[0])
 		})
 		.catch((error) => {
 		    console.log(error);
 		})
-
-
-	}
+  })
 
 
   console.log("DASDFASUIOFHSDILOUGFHSDGFYUILOHSDGILOUSDHGL:")
   console.log(props)
     return (
       <div>
+        {champion.buffAbility} | 
         Info for {props.match.params.id}
         
 
