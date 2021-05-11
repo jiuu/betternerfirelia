@@ -9,6 +9,11 @@ const champSchema = new Schema({
 		trim: true,
 		minlength: 1
 	},
+	buffAbility: {
+		type: String,
+		required: false,
+		default: "",
+	},
 	buffText: {
 		type: String,
 		required: false,
@@ -18,6 +23,11 @@ const champSchema = new Schema({
 		type: Date,
 		required: false,
 		default: new Date(),	
+	},
+	nerfAbility: {
+		type: String,
+		required: false,
+		default: "",
 	},
 	nerfText: {
 		type: String,

@@ -12,8 +12,10 @@ router.route('/add').post((req,res) => {
 
 	const newChamp = new Champion({
 	name: req.body.name,
+	buffAbility: req.body.buffability,
 	buffText: req.body.bufftext,
 	buffDate: req.body.buffdate,
+	nerfAbility: req.body.nerfability,
 	nerfText: req.body.nerftext,
 	nerfDate: req.body.nerfdate
 	});
@@ -36,15 +38,32 @@ router.route('/:id').delete((req,res) => {
 });
 
 router.route('/update/:id').post((req,res) => {
+	const filter = { name: req.params.id}
+	const update = {
+		
+		buffAbility: req.body.buffability,
+		buffText: req.body.bufftext,
+		buffDate: req.body.buffdate,
+		nerfAbility: req.body.nerfability,
+		nerfText: req.body.nerftext,
+		nerfDate: req.body.nerfdate}
+	Champion.findOneAndUpdate(filter, update, {returnOriginal: false})
+	/*
 	Champion.findById(req.params.id)
 	.then((champion) => {
 		champion.name = req.body.name;
+		champion.buffAbility = req.body.buffability;
+		champion.buffText = req.body.bufftext;
+		champion.buffDate = req.body.buffdate;
+		champion.nerfAbility = req.body.nerfability;
+		champion.nerfText = req.body.nerftext;
+		champion.nerfDate = req.body.nerfdate;
 
 		champion.save()
 		.then(() => res.json('Champion updated!'))
 		.catch(err => res.status(400).json('Error: ' + err));
 	})
-	.catch(err => res.status(400).json('Error: ' + err));
+	.catch(err => res.status(400).json('Error: ' + err));*/
 });
 
 module.exports = router;

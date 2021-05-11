@@ -37,12 +37,12 @@ async function getChamps() {
 async function getChampData(name) {
 	const EXCLUDES = ['BUG FIX', 'NEW EFFECT', 'REMOVED', 'UNDOCUMENTED', ]
 	const EXCEPTIONS = ['Cooldown', 'Mana cost']
-	buffNote = null
-	nerfNote = null
-	buffPatch = null
-	nerfPatch = null
 	buffAbility = null
+	buffNote = null
+	buffPatch = null
 	nerfAbility = null
+	nerfNote = null
+	nerfPatch = null
 	patchList = [];
 	changeList = [];
 	abilityList = [];
@@ -87,8 +87,8 @@ async function getChampData(name) {
 		patchList = res[0]
 		changeList = res[1]
 		abilityList = res[2]
-		console.log(res[1])
-		console.log(res[2])
+		//console.log(res[1])
+		//console.log(res[2])
 	});
 
 	for (i = 0; i < changeList.length; i++) {
@@ -152,11 +152,16 @@ async function getChampData(name) {
 	console.log(buffPatch)
 	
 	console.log(nerfPatch)
-
+	if (buffAbility != null && buffAbility.startsWith(" ")) {
+		buffAbility = buffAbility.substring(1);
+	}
+	if (nerfAbility != null && nerfAbility.startsWith(" ")) {
+		nerfAbility = nerfAbility.substring(1);
+	}
 
 	//console.log(typeof(buffPatch))
 	await browser.close();	
-    return [buffNote, buffPatch, nerfNote, nerfPatch, buffAbility, nerfAbility];
+    return [buffAbility, buffNote, buffPatch, nerfAbility, nerfNote, nerfPatch];
 
 }
 
@@ -210,10 +215,10 @@ async function getDate(patch) {
 			console.log(value)
 	});
 }) */
-getChampData('irelia')
+/*getChampData('irelia')
 .then((value)=> {
 	console.log(value)
-});
+});*/
 
 
 

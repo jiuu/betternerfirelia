@@ -12,19 +12,34 @@ async function dailyTask() {
 	//let champData = null;
 	console.table(champList);
 	console.log(champList);
+	var vari = 1
 	for(champ of champList) {
 		console.log(champ)
 
 		champData = await scrape.getChampData(champ)
 		axios.post('http://localhost:5000/champions/add/', {
 			name: champ,
-			bufftext: champData[0],
+			buffability: champData[0],
+			bufftext: champData[1],
 			buffDate: Date.now,
-			nerftext: champData[2],
+			nerfability: champData[3],
+			nerftext: champData[4],
 			nerfDate: Date.now
 		}).catch(error => {
-			console.log(error.message);
+			console.log(error.message)
+			axios.post(`http://localhost:5000/champions/update/${champ}`, {
+			name: champ,
+			buffability: champData[0],
+			bufftext: champData[1],
+			buffDate: Date.now,
+			nerfability: champData[3],
+			nerftext: champData[4],
+			nerfDate: Date.now
+			}).catch(error => {
+				console.log(error.message)
+			})
 		})
+		
 	}
 	/*champList.map(x => 
 		champData = scrape.getChampData(x)
