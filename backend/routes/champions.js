@@ -37,17 +37,21 @@ router.route('/:id').delete((req,res) => {
 	.catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.route('/update/:id').post((req,res) => {
-	const filter = { name: req.params.id}
+router.route('/update/:id').put((req,res) => {
 	const update = {
-		
+		name: req.body.name,
 		buffAbility: req.body.buffability,
 		buffText: req.body.bufftext,
 		buffDate: req.body.buffdate,
 		nerfAbility: req.body.nerfability,
 		nerfText: req.body.nerftext,
-		nerfDate: req.body.nerfdate}
-	Champion.findOneAndUpdate(filter, update, {returnOriginal: false})
+		nerfDate: req.body.nerfdate
+	}
+	const filter = { name: req.params.id}
+
+	Champion.findOneAndUpdate(filter, update, {upsert: true})
+	.then(() => res.json('Champion updated!'))
+	.catch(err => res.status(400).json('Error: ' + err));
 	/*
 	Champion.findById(req.params.id)
 	.then((champion) => {

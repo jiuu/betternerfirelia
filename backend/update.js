@@ -17,28 +17,31 @@ async function dailyTask() {
 		console.log(champ)
 
 		champData = await scrape.getChampData(champ)
-		axios.post('http://localhost:5000/champions/add/', {
+		dsBuff = await scrape.getDate(champData[2])
+		console.log(dsBuff)
+		dsNerf = await scrape.getDate(champData[5])
+		/*axios.post('http://localhost:5000/champions/add/', {
 			name: champ,
 			buffability: champData[0],
 			bufftext: champData[1],
-			buffDate: Date.now,
+			buffdate: Date.now,
 			nerfability: champData[3],
 			nerftext: champData[4],
-			nerfDate: Date.now
+			nerfdate: Date.now
+		})*/
+		
+		axios.put(`http://localhost:5000/champions/update/${champ}`, {
+			name: champ,
+			buffability: champData[0],
+			bufftext: champData[1],
+			buffdate: dsBuff,
+			nerfability: champData[3],
+			nerftext: champData[4],
+			nerfdate: dsNerf
 		}).catch(error => {
 			console.log(error.message)
-			axios.post(`http://localhost:5000/champions/update/${champ}`, {
-			name: champ,
-			buffability: champData[0],
-			bufftext: champData[1],
-			buffDate: Date.now,
-			nerfability: champData[3],
-			nerftext: champData[4],
-			nerfDate: Date.now
-			}).catch(error => {
-				console.log(error.message)
-			})
 		})
+	
 		
 	}
 	/*champList.map(x => 

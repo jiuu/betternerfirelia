@@ -91,6 +91,7 @@ import {Component} from 'react'
 import axios from 'axios';
 import Home from './home.component';
 import styles from '../styles/championpagestyles.css';
+import ChampionList from './champion-list.component'
 
 import {
     BrowserRouter as Router,
@@ -112,7 +113,7 @@ function BasicChampionInfo(props) {
 
 function ChampionIcon(props) {
     console.log(props)
-    let imageSource = "../icons/" + props + ".png"
+    let imageSource = "../icons/" + props.match.params.id + ".png"
     console.log(imageSource)
     return (
         <div className="imageSourceClass">
@@ -142,12 +143,12 @@ function ChampionPage(props) {
   console.log(props)
     return (
       <div>
-        {champion.buffAbility} | 
-        Info for {props.match.params.id}
-        
+        <img src={"../icons/" + props.match.params.id + '.png'}/>  {props.match.params.id} <br />
+        {champion.buffAbility} | {champion.buffText} | {champion.buffDate} <br /> 
+        {champion.nerfAbility} | {champion.nerfText} | {champion.nerfDate} <br /> <br />
 
 
-        <a href="/"><p>Back to home page!</p></a>
+        {/*<a href="/"><p>Home</p></a> */}
       </div>
     );
   

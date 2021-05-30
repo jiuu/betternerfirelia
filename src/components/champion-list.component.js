@@ -16,7 +16,7 @@ import {
 const Champion = props => (
 	
 		<a id={props.key} href={"/champions/" + props.champion.name}>
-			<img src={"http://localhost:3000/icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
+			<img src={"../icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
 		</a>
 	
 )
