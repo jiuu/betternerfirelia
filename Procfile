@@ -1,1 +1,1 @@
-worker: sh -c 'cd backend && node server'	
+worker: cd backend && node server	
