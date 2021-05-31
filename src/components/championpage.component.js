@@ -129,7 +129,7 @@ function ChampionPage(props) {
 
   const [champion, setChampion] = useState(0)
   useEffect(() => {
-    axios.get('http://localhost:5000/champions/' + props.match.params.id)
+    axios.get('https://bni-backend.herokuapp.com/champions/' + props.match.params.id)
 		.then(response => {
 			setChampion(response.data[0])
 		})
