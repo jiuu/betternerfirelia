@@ -33,7 +33,7 @@ export default class ChampionList extends Component {
 	
 	componentDidMount() {
 		
-		axios.get('http://198.211.113.222:5000/champions/')
+		axios.get('http://localhost:5000/champions/')
 		.then(response => {
 			this.setState({champions: response.data})
 		})
