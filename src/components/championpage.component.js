@@ -129,7 +129,7 @@ function ChampionPage(props) {
 
   const [champion, setChampion] = useState(0)
   useEffect(() => {
-    axios.get('//198.211.113.222:5000/champions/' + props.match.params.id)
+    axios.get('198.211.113.222:5000/champions/' + props.match.params.id)
 		.then(response => {
 			setChampion(response.data[0])
 		})
