@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
-import styles from '../styles/championliststyles.css';
+import React, {useEffect, useState} from 'react';
 import ChampionPage from './championpage.component';
+
 
 import {
     BrowserRouter as Router,
@@ -15,42 +13,32 @@ import {
 
 const Champion = props => (
 	
-		<a id={props.key} href={"/champions/" + props.champion.name}>
-			<img src={"../icons/" + (props.champion.name).replace(/'|\s|\.|\&/g,"") + ".png"}/>
+		<a id={props.key} href={"/champions/" + props.champion}>
+			<img src={"../icons/" + (props.champion).replace(/'|\s|\.|\&/g,"") + ".png"}/>
 		</a>
 	
 )
 
-export default class ChampionList extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			champions: []
-		};
-		
-	}
+function ChampionList() {
+	const [champions, setChampions] = useState([])
+	let champKey = 0;
 	
-	componentDidMount() {
+	useEffect(() => {
+		async function fetchChamps() {
+			let response = await fetch('https://ddragon.leagueoflegends.com/cdn/14.10.1/data/en_US/champion.json');
+			let data = await response.json();
+			let champs = Object.keys(data.data).sort(); // Extracting champion names and sorting them
+			setChampions(champs)
+		}
+		fetchChamps()
 		
-		axios.get('https://bni-backend.herokuapp.com/champions/')
-		.then(response => {
-			this.setState({champions: response.data})
-		})
-		.catch((error) => {
-		console.log(error);
-		})
+	}, [])
 
-	}
-	championList() {
-		let myKeyCounter = 0;
-		return this.state.champions.map(currentchampion => {
 			
-			return <Champion key={myKeyCounter++} champion = {currentchampion}/>;
-		})
-	}
+		 
+		
 
-	render() {
+	
 		return(
 			<Router>
 				
@@ -58,10 +46,14 @@ export default class ChampionList extends Component {
 			
 			<Route path="/champions/:id" component={ChampionPage} />
 				<div className="championList">
-						{this.championList()}
+						{champions.map(champ => {
+							return <Champion key={champKey++} champion={champ} />
+						})}
 				</div>
 			</Switch>
 			</Router>
 		)
-	}
+	
 }
+
+export default ChampionList

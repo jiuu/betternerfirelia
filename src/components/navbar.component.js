@@ -15,9 +15,8 @@ import SearchSummoner from './searchsummoner.component';
 function MyNav(props){
 
     return(
-        <div>
-            <div className="row">
-                <div className="col-md-12">
+
+                <div>
                     <Router>
                         <Navbar bg="dark" variant="dark" expand="lg" sticky="top">
                             <Navbar.Brand href="/">BetterNerfIrelia</Navbar.Brand>
@@ -42,8 +41,7 @@ function MyNav(props){
                         <br />
                     </Router>
                 </div>
-            </div>
-        </div>
+
     )  
 
 }

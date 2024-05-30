@@ -23,14 +23,9 @@ async function getChamps() {
 	}).then(res => {
 		champList = res;
 	});
-	//console.log(await page.content());
 
-	//const element = await page.$('[class="article-table sticky-header sortable jquery-tablesorter"]');
-	//table_body = await element.$('tbody');
-	//table_rows = await table_body.$('tr');
-	//console.log(await element.text);
 	await browser.close();	
-	//console.log(champList);
+
 
 	return champList;
 }
