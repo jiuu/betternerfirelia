@@ -1,16 +1,11 @@
 import React from 'react'
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
-    useParams,
-  } from "react-router-dom";
-  import { Navbar,Nav,NavDropdown,Form,FormControl,Button } from 'react-bootstrap'
 
-import About from './about.component';
-import Home from './home.component';
-import Contact from './contact.component';
-import SearchSummoner from './searchsummoner.component';
+  } from "react-router-dom";
+  import { Navbar,Nav,NavDropdown,Form, } from 'react-bootstrap'
+
+
 
 function MyNav(props){
 
